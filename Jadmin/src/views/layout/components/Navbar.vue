@@ -9,8 +9,6 @@
         <screenfull class="screenfull right-menu-item"></screenfull>
       </el-tooltip>
 
-      <lang-select class="international right-menu-item"></lang-select>
-
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
           <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
@@ -43,15 +41,12 @@ import Hamburger from '@/components/Hamburger'
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import LangSelect from '@/components/LangSelect'
-import ThemePicker from '@/components/ThemePicker'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    Screenfull,
-    LangSelect,
-    ThemePicker
+    Screenfull
   },
   computed: {
     ...mapGetters([
