@@ -25,70 +25,79 @@ import Layout from '@/views/layout/Layout'
   }
 **/
 export const constantRouterMap = [{
-        path: '/login',
-        component: () =>
-            import ('@/views/login/index'),
-        hidden: true
-    },
-    {
-        path: '/authredirect',
-        component: () =>
-            import ('@/views/login/authredirect'),
-        hidden: true
-    },
-    {
-        path: '/404',
-        component: () =>
-            import ('@/views/errorPage/404'),
-        hidden: true
-    },
-    {
-        path: '/401',
-        component: () =>
-            import ('@/views/errorPage/401'),
-        hidden: true
-    },
-    {
-        path: '',
-        component: Layout,
-        redirect: 'dashboard',
-        children: [{
-            path: 'dashboard',
-            component: () =>
-                import ('@/views/dashboard/index'),
-            name: 'dashboard',
-            meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
-        }]
+  path: '/login',
+  component: () =>
+            import('@/views/login/index'),
+  hidden: true
+},
+{
+  path: '/authredirect',
+  component: () =>
+            import('@/views/login/authredirect'),
+  hidden: true
+},
+{
+  path: '/404',
+  component: () =>
+            import('@/views/errorPage/404'),
+  hidden: true
+},
+{
+  path: '/401',
+  component: () =>
+            import('@/views/errorPage/401'),
+  hidden: true
+},
+{
+  path: '',
+  component: Layout,
+  redirect: 'dashboard',
+  children: [{
+    path: 'dashboard',
+    component: () =>
+                import('@/views/dashboard/index'),
+    name: 'dashboard',
+    meta: {
+      title: 'dashboard',
+      icon: 'dashboard',
+      noCache: true
     }
+  }]
+}
 ]
 
 export default new Router({
-    // mode: 'history', // require service support
-    scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
+  // mode: 'history', // require service support
+  scrollBehavior: () => ({
+    y: 0
+  }),
+  routes: constantRouterMap
 })
 
 export const asyncRouterMap = [{
-        path: '/system',
-        component: Layout,
-        alwaysShow: true, // will always show the root menu
-        meta: {
-            title: '系统管理',
-            icon: 'lock',
-            roles: ['admin', 'editor'] // you can set roles in root nav
-        },
-        children: [{
-            path: 'role',
-            component: () =>
-                import ('@/views/system/RoleList'),
-            name: 'pageRoleList',
-            meta: {
-                title: '角色管理',
-                roles: ['admin'] // or you can only set roles in sub nav
-            }
-        }]
-    },
+  path: '/system',
+  component: Layout,
+  alwaysShow: true, // will always show the root menu
+  meta: {
+    title: '系统管理',
+    icon: 'lock',
+    roles: ['admin', 'editor'] // you can set roles in root nav
+  },
+  children: [{
+    path: 'role',
+    component: () =>
+                import('@/views/system/RoleList'),
+    name: 'pageRoleList',
+    meta: {
+      title: '角色管理',
+      roles: ['admin'] // or you can only set roles in sub nav
+    }
+  }]
+},
 
-
-    { path: '*', redirect: '/404', hidden: true }
+{
+  path: '*',
+  redirect: '/404',
+  hidden: true
+}
 ]
