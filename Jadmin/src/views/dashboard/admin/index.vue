@@ -71,6 +71,7 @@ const lineChartData = {
     actualData: [120, 82, 91, 154, 162, 140, 130]
   }
 }
+
 export default {
   name: 'dashboard-admin',
   components: {
