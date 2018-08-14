@@ -41,3 +41,13 @@ export function validateEmail(email) {
   return re.test(email)
 }
 
+
+/**
+ * 角色名
+ * @param roleName
+ * @returns {boolean}
+ */
+export function isValidateRoleName(roleName) {
+  const reg = /^ROLE_[A-Z]+$/
+  return reg.test(roleName)
+}

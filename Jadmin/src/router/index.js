@@ -89,8 +89,7 @@ export const asyncRouterMap = [{
         import ('@/views/system/RoleList'),
       name: 'pageRoleList',
       meta: {
-        title: '角色管理',
-        roles: ['admin'] // or you can only set roles in sub nav
+        title: '角色管理'
       }
     }]
   },

@@ -1,82 +1,72 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import {
+  login,
+  logout,
+  info
+} from '@/api/user'
+import {
+  getToken,
+  setToken,
+  removeToken
+} from '@/utils/token'
 
 const user = {
   state: {
-    user: '',
-    status: '',
-    code: '',
     token: getToken(),
-    name: '',
-    avatar: '',
-    introduction: '',
-    roles: [],
-    setting: {
-      articlePlatform: []
-    }
+    userId: -1,
+    email: null,
+    username: null,
+    avatar: null,
+    loginTime: -1,
+    registerTime: -1,
+    resume: null,
+    roleName: null,
+    permissionCodeList: []
   },
 
   mutations: {
-    SET_CODE: (state, code) => {
-      state.code = code
-    },
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_INTRODUCTION: (state, introduction) => {
-      state.introduction = introduction
+    SET_USER: (state, user) => {
+      state.userId = user.id
+      state.email = user.email
+      state.username = user.username
+      state.avatar = user.avatar
+      state.loginTime = user.loginTime
+      state.registerTime = user.registerTime
+      state.resume = user.resume
+      state.roleName = user.roleName
+      state.permissionCodeList = user.permissionCodeList
+      console.log(state);
     },
-    SET_SETTING: (state, setting) => {
-      state.setting = setting
-    },
-    SET_STATUS: (state, status) => {
-      state.status = status
-    },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
-    },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    RESET_USER: (state) => {
+      state.token = null
+      state.userId = -1
+      state.email = null
+      state.username = null
+      state.avatar = null
+      state.loginTime = -1
+      state.registerTime = -1
+      state.resume = null
+      state.roleName = null
+      state.permissionCodeList = []
     }
   },
 
   actions: {
-    // 用户名登录
-    LoginByUsername({ commit }, userInfo) {
-      const username = userInfo.username.trim()
+    // 登录
+    Login({
+      commit
+    }, loginForm) {
       return new Promise((resolve, reject) => {
-        loginByUsername(username, userInfo.password).then(response => {
-          const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-
-    // 获取用户信息
-    GetUserInfo({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(response => {
-          if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
-            reject('error')
+        login(loginForm).then(response => {
+          if (response.data.code === 200) {
+            // cookie中保存token
+            console.log(response.data.data);
+            // vuex中保存token
+            commit('SET_TOKEN', response.data.data)
           }
-          const data = response.data
-
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
-          } else {
-            reject('getInfo: roles must be a non-null array !')
-          }
-
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
+          // 传递给/login/index.web : store.dispatch('Login').then(data)
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -84,26 +74,30 @@ const user = {
       })
     },
 
-    // 第三方验证登录
-    // LoginByThirdparty({ commit, state }, code) {
-    //   return new Promise((resolve, reject) => {
-    //     commit('SET_CODE', code)
-    //     loginByThirdparty(state.status, state.email, state.code).then(response => {
-    //       commit('SET_TOKEN', response.data.token)
-    //       setToken(response.data.token)
-    //       resolve()
-    //     }).catch(error => {
-    //       reject(error)
-    //     })
-    //   })
-    // },
+    // 获取用户信息
+    Info({
+      commit
+    }) {
+      return new Promise((resolve, reject) => {
+        info().then(response => {
+          // 储存用户信息
+          console.log(response);
+          commit('SET_USER', response.data.data)
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
 
     // 登出
-    LogOut({ commit, state }) {
+    Logout({
+      commit
+    }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
+        logout().then(() => {
+          // 清除token等相关角色信息
+          commit('RESET_USER')
           removeToken()
           resolve()
         }).catch(error => {
@@ -113,27 +107,13 @@ const user = {
     },
 
     // 前端 登出
-    FedLogOut({ commit }) {
+    FedLogout({
+      commit
+    }) {
       return new Promise(resolve => {
-        commit('SET_TOKEN', '')
+        commit('RESET_USER')
         removeToken()
         resolve()
-      })
-    },
-
-    // 动态修改权限
-    ChangeRoles({ commit }, role) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', role)
-        setToken(role)
-        getUserInfo(role).then(response => {
-          const data = response.data
-          commit('SET_ROLES', data.roles)
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
-          resolve()
-        })
       })
     }
   }
