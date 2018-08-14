@@ -62,6 +62,7 @@ const user = {
         login(loginForm).then(response => {
           if (response.data.code === 200) {
             // cookie中保存token
+            setToken(response.data)
             console.log(response.data.data);
             // vuex中保存token
             commit('SET_TOKEN', response.data.data)
