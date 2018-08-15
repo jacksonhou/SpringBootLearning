@@ -76,7 +76,7 @@ export default new Router({
 
 export const asyncRouterMap = [{
     path: '/system',
-    component: Layout,
+      component: Layout,
     redirect: '/system/index',
     alwaysShow: true, // will always show the root menu
     meta: {
@@ -86,7 +86,7 @@ export const asyncRouterMap = [{
     children: [{
       path: 'index',
       name: 'Role',
-      component: import ('@/views/system/RoleList'),
+      component: () => import ('@/views/system/RoleList'),
       meta: {
         title: '角色管理',
         permission: ['role:list']

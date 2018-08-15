@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-    <el-card class="box-card">
+    adfasdf
+    <!-- <el-card class="box-card">
       <el-form :inline="true" :model="formInline">
         <el-form-item label="审批人">
           <el-input v-model="formInline.user" placeholder="审批人"></el-input>
@@ -59,35 +60,35 @@
         <el-button type="primary" @click="onSubmit">立即创建</el-button>
         <el-button>取消</el-button>
       </el-form-item>
-    </el-form>
+    </el-form> -->
   </div>
 </template>
 
-<script>
-export default {
-  name: "UserList",
-  data() {
-    return {
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
-      },
-      formInline: {
-        user: "",
-        region: ""
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      console.log("submit!");
-    }
-  }
-};
-</script>
+// <script>
+// export default {
+//   name: "UserList",
+//   data() {
+//     return {
+//       form: {
+//         name: "",
+//         region: "",
+//         date1: "",
+//         date2: "",
+//         delivery: false,
+//         type: [],
+//         resource: "",
+//         desc: ""
+//       },
+//       formInline: {
+//         user: "",
+//         region: ""
+//       }
+//     };
+//   },
+//   methods: {
+//     onSubmit() {
+//       console.log("submit!");
+//     }
+//   }
+// };
+// </script>
