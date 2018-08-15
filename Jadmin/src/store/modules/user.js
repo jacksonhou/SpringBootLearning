@@ -37,7 +37,6 @@ const user = {
       state.resume = user.resume
       state.roleName = user.roleName
       state.permissionCodeList = user.permissionCodeList
-      console.log(state);
     },
     RESET_USER: (state) => {
       state.token = null
@@ -62,8 +61,7 @@ const user = {
         login(loginForm).then(response => {
           if (response.data.code === 200) {
             // cookie中保存token
-            setToken(response.data)
-            console.log(response.data.data);
+            setToken(response.data.data)
             // vuex中保存token
             commit('SET_TOKEN', response.data.data)
           }
@@ -82,7 +80,6 @@ const user = {
       return new Promise((resolve, reject) => {
         info().then(response => {
           // 储存用户信息
-          console.log(response);
           commit('SET_USER', response.data.data)
           resolve(response)
         }).catch(error => {

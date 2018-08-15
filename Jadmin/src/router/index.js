@@ -77,19 +77,19 @@ export default new Router({
 export const asyncRouterMap = [{
     path: '/system',
     component: Layout,
+    redirect: '/system/index',
     alwaysShow: true, // will always show the root menu
     meta: {
       title: '系统管理',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      icon: 'lock'
     },
     children: [{
-      path: 'role',
-      component: () =>
-        import ('@/views/system/RoleList'),
-      name: 'pageRoleList',
+      path: 'index',
+      name: 'Role',
+      component: import ('@/views/system/RoleList'),
       meta: {
-        title: '角色管理'
+        title: '角色管理',
+        permission: ['role:list']
       }
     }]
   },

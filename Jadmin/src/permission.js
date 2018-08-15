@@ -26,18 +26,16 @@ router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
   if (getToken()) { // determine if there has token
     /* has token*/
-    console.log(to.path);
     if (to.path === '/login') {
       next({
         path: '/'
       })
       NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
     } else {
-      console.log(store.getters.roleName);
-      if (store.getters.roleName === undefined) { // 判断当前用户是否已拉取完user_info信息
-        store.dispatch('Info').then(res => { // 拉取user_info
+      if (store.getters.roleName === null) { // 判断当前用户是否已拉取完user_info信息
+        store.dispatch('Info').then(response => { // 拉取user_info
           // 生成路由
-          store.dispatch('GenerateRoutes', response.data).then(() => {
+          store.dispatch('GenerateRoutes', response.data.data).then(() => {
             router.addRoutes(store.getters.addRouters)
             next({ ...to
             })
@@ -51,22 +49,7 @@ router.beforeEach((to, from, next) => {
           })
         })
       } else {
-        // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
-        console.log(3);
-        console.log(store.getters.roles);
-        console.log(4);
-        if (hasPermission(store.getters.roles, to.meta.roles)) {
-          next() //
-        } else {
-          next({
-            path: '/401',
-            replace: true,
-            query: {
-              noGoBack: true
-            }
-          })
-        }
-        // 可删 ↑
+        next();
       }
     }
   } else {

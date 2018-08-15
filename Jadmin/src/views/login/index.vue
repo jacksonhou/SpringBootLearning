@@ -11,7 +11,7 @@
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" :placeholder="$t('login.username')" />
+        <el-input name="username" type="text" v-model="loginForm.usernameOrEmail" autoComplete="on" :placeholder="$t('login.username')" />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -105,9 +105,8 @@ export default {
           user.password = this.loginForm.password
           this.loading = true
           this.$store.dispatch('Login', user).then(() => {
-            console.log('login success');
             this.loading = false
-            this.$router.push({ path: '/system/role' })
+            this.$router.push({ path: '/system' })
           })
         }
       })
