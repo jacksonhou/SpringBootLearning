@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
+        <version>2.0.4.RELEASE</version>
     </parent>
     <dependencies>
         <!-- spring security + json web token -->
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>1.2.49</version>
         </dependency>
 
         <!-- 阿里 Druid Spring Boot Starter 依赖 -->
