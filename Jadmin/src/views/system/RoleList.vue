@@ -148,6 +148,7 @@ export default {
      */
     getRoleList() {
       this.listLoading = true
+      
       getRoleList(this.listQuery).then(response => {
         this.roleList = response.data.list
         this.total = response.data.total
