@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
       if (store.getters.roleName === null) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('Info').then(response => { // 拉取user_info
           // 生成路由
-          store.dispatch('GenerateRoutes', response.data.data).then(() => {
+          store.dispatch('GenerateRoutes', response.data).then(() => {
             router.addRoutes(store.getters.addRouters)
             next({ ...to
             })

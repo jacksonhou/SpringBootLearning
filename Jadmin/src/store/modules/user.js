@@ -59,11 +59,11 @@ const user = {
     }, loginForm) {
       return new Promise((resolve, reject) => {
         login(loginForm).then(response => {
-          if (response.data.code === 200) {
+          if (response.code === 200) {
             // cookie中保存token
-            setToken(response.data.data)
+            setToken(response.data)
             // vuex中保存token
-            commit('SET_TOKEN', response.data.data)
+            commit('SET_TOKEN', response.data)
           }
           // 传递给/login/index.web : store.dispatch('Login').then(data)
           resolve(response)
@@ -80,7 +80,7 @@ const user = {
       return new Promise((resolve, reject) => {
         info().then(response => {
           // 储存用户信息
-          commit('SET_USER', response.data.data)
+          commit('SET_USER', response.data)
           resolve(response)
         }).catch(error => {
           reject(error)

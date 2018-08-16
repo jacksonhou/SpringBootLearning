@@ -40,7 +40,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-size="listQuery.size" :total="total" :page-sizes="[10, 30, 50, 100]" layout="total, sizes, prev, pager, next, jumper">
+    <el-pagination background class="pull-right clearfix" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-size="listQuery.size" :total="total" :page-sizes="[10, 30, 50, 100]" layout="total, sizes, prev, pager, next, jumper">
     </el-pagination>
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form status-icon class="small-space" label-position="left" label-width="100px" style="width: 500px; margin-left:50px;" :model="tempRole" :rules="createRules" ref="tempRole">

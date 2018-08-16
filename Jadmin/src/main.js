@@ -4,6 +4,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/zh-CN'
 
 import '@/styles/index.scss' // global css
 
@@ -19,10 +20,14 @@ import './permission' // permission control
 import { hasPermission } from './utils/hasPermission'
 
 import * as filters from './filters' // global filters
+import $ from 'jquery'
+import './assets/bootstrap-3.3.7/css/bootstrap.min.css'
+import './assets/bootstrap-3.3.7/js/bootstrap.min.js'
 
 Vue.use(Element, {
     size: 'medium', // set element-ui default size
-    i18n: (key, value) => i18n.t(key, value)
+    // i18n: (key, value) => i18n.t(key, value),
+    locale
 })
 
 // 全局的常量
