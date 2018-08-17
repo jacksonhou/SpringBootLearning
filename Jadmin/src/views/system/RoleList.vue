@@ -1,11 +1,14 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form>
+      <el-form :inline="true">
         <el-form-item>
-          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('role:list')" @click.native.prevent="getRoleList">refresh
+          <el-input placeholder="角色名称"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('role:list')" @click.native.prevent="getRoleList">查询
           </el-button>
-          <el-button type="primary" icon="el-icon-plus" v-if="hasPermission('role:add')" @click.native.prevent="showAddRoleDialog">add
+          <el-button type="primary" icon="el-icon-plus" v-if="hasPermission('role:add')" @click.native.prevent="showAddRoleDialog">增加
           </el-button>
         </el-form-item>
       </el-form>
@@ -16,8 +19,8 @@
           <span v-text="getTableIndex(scope.$index)"></span>
         </template>
       </el-table-column>
-      <el-table-column label="Role Name" align="center" prop="name" />
-      <el-table-column label="Permission" align="center">
+      <el-table-column label="角色名称" align="center" prop="name" />
+      <el-table-column label="权限" align="center">
         <template slot-scope="scope">
           <el-tag type="success" v-if="scope.row.name === 'ROLE_ADMIN'">all
           </el-tag>
@@ -31,11 +34,11 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="Admin" align="center" v-if="hasPermission('role:update') || hasPermission('role:delete')">
+      <el-table-column label="操作" align="center" v-if="hasPermission('role:update') || hasPermission('role:delete')">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit-outline" v-if="hasPermission('role:update') && scope.row.name !== 'ROLE_ADMIN'" @click="showUpdateRoleDialog(scope.$index)">update
+          <el-button type="primary" icon="el-icon-edit-outline" v-if="hasPermission('role:update') && scope.row.name !== 'ROLE_ADMIN'" @click="showUpdateRoleDialog(scope.$index)">修改
           </el-button>
-          <el-button type="danger" icon="el-icon-delete" v-if="hasPermission('role:delete') && scope.row.name !== 'ROLE_ADMIN'" @click="removeRole(scope.$index)">delete
+          <el-button type="danger" icon="el-icon-delete" v-if="hasPermission('role:delete') && scope.row.name !== 'ROLE_ADMIN'" @click="removeRole(scope.$index)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -382,8 +385,5 @@ export default {
     }
   }
 }
+
 </script>
-
-<style scoped>
-</style>
-

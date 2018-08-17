@@ -26,7 +26,7 @@ import $ from 'jquery'
 import '@/assets/css/common.css'
 
 Vue.use(Element, {
-  size: 'medium', // set element-ui default size
+  size: 'small', // set element-ui default size (medium / small / mini)
   // i18n: (key, value) => i18n.t(key, value),
   locale
 })
