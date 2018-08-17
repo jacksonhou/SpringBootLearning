@@ -33,13 +33,4 @@ public class Application
     {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
-
-    // @Bean
-    // public PaginationInterceptor paginationInterceptor()
-    // {
-    //     PaginationInterceptor page = new PaginationInterceptor();
-    //     page.setDialect("mysql");
-    //     page.setPageSqlId(".*list.*");
-    //     return page;
-    // }
 }
