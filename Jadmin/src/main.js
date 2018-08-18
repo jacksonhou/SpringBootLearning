@@ -23,7 +23,6 @@ import {
 
 import * as filters from './filters' // global filters
 import $ from 'jquery'
-import '@/assets/css/common.css'
 
 Vue.use(Element, {
   size: 'small', // set element-ui default size (medium / small / mini)

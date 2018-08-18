@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.zoctan.api.core.ProjectConstant.*;
+import static com.jadmin.api.core.ProjectConstant.*;
 
 /**
  * 代码生成器，根据数据表名称生成对应的Model、MyMapper、Service、Controller简化开发。
@@ -39,7 +39,7 @@ class CodeGenerator {
     private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);
 
     // @author
-    private static final String AUTHOR = "Zoctan";
+    private static final String AUTHOR = "Jadmin";
     // @date
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     private static final boolean isRestful = true;
