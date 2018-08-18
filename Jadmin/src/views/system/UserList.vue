@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :inline="true">
         <el-form-item>
-          <el-input placeholder="用户名"></el-input>
+          <el-input placeholder="用户名" v-model="listQuery.userName"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('user:list')" @click.native.prevent="getUserList">查询
@@ -122,7 +122,8 @@ export default {
       total: 0, // 数据总数
       listQuery: {
         page: 1, // 页码
-        size: 30 // 每页数量
+        size: 30, // 每页数量
+        userName: ''
       },
       dialogStatus: 'add',
       dialogFormVisible: false,

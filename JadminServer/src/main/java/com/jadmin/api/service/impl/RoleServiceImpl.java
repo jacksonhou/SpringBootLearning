@@ -26,8 +26,8 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
     private RolePermissionMapper rolePermissionMapper;
 
     @Override
-    public List<com.jadmin.api.model.Resource> findAllRoleWithPermission() {
-        return this.roleMapper.findAllRoleWithPermission();
+    public List<com.jadmin.api.model.Resource> findAllRoleWithPermission(String notes) {
+        return this.roleMapper.findAllRoleWithPermission(notes);
     }
 
     @Override

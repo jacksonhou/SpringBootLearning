@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :inline="true">
         <el-form-item>
-          <el-input placeholder="角色名称"></el-input>
+          <el-input placeholder="角色描述" v-model="listQuery.notes"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('role:list')" @click.native.prevent="getRoleList">查询
@@ -118,7 +118,8 @@ export default {
       total: 0,
       listQuery: {
         page: 1,
-        size: 30
+        size: 30,
+        notes: ''
       },
       dialogStatus: 'add',
       dialogFormVisible: false,

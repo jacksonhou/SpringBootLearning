@@ -16,7 +16,7 @@ public interface UserService extends Service<User> {
      *
      * @return 用户列表
      */
-    List<User> findAllUserWithRole();
+    List<User> findAllUserWithRole(String userName);
 
     /**
      * 按条件查询用户信息

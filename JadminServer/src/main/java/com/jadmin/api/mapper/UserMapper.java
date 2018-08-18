@@ -11,13 +11,14 @@ import java.util.Map;
  * @author Jadmin
  * @date 2018/06/09
  */
-public interface UserMapper extends MyMapper<User> {
+public interface UserMapper extends MyMapper<User>
+{
     /**
      * 获取所有用户以及对应角色
      *
      * @return 用户列表
      */
-    List<User> findAllUserWithRole();
+    List<User> findAllUserWithRole(@Param("userName") String userName);
 
     /**
      * 按条件查询用户信息

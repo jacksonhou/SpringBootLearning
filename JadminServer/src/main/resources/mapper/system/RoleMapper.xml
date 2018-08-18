@@ -28,5 +28,9 @@
         FROM `role` r
         LEFT JOIN `role_permission` rp ON r.id = rp.role_id
         LEFT JOIN `permission` p ON rp.permission_id = p.id
+        WHERE 1=1
+        <if test="notes!=null and notes!=''">
+            AND r.notes like CONCAT('%',#{notes},'%')
+        </if>
     </select>
 </mapper>
