@@ -27,6 +27,9 @@ public class Role {
     @NotEmpty(message = "角色名不能为空")
     private String name;
 
+    @NotEmpty(message = "角色描述不能为空")
+    private String notes;
+
     /* ---------- 以下字段来自联表查询 ------------*/
 
     /**
@@ -74,5 +77,15 @@ public class Role {
 
     public void setPermissionIdList(final List<Integer> permissionIdList) {
         this.permissionIdList = permissionIdList;
+    }
+
+    public String getNotes()
+    {
+        return notes;
+    }
+
+    public void setNotes(String notes)
+    {
+        this.notes = notes;
     }
 }

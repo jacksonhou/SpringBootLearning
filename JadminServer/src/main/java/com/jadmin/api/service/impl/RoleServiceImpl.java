@@ -38,6 +38,7 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
 
     @Override
     public void update(final Role role) {
+        roleMapper.updateByPrimaryKey(role);
         // 删掉所有权限，再添加回去
         final Condition condition = new Condition(RolePermission.class);
         condition.createCriteria().andCondition("role_id = ", role.getId());

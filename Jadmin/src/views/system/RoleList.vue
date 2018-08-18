@@ -20,6 +20,7 @@
         </template>
       </el-table-column>
       <el-table-column label="角色名称" align="center" prop="name" />
+      <el-table-column label="角色描述" align="center" prop="notes" />
       <el-table-column label="权限" align="center">
         <template slot-scope="scope">
           <el-tag type="success" v-if="scope.row.name === 'ROLE_ADMIN'">all
@@ -47,12 +48,16 @@
     </el-pagination>
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form status-icon class="small-space" label-position="left" label-width="100px" style="width: 500px; margin-left:50px;" :model="tempRole" :rules="createRules" ref="tempRole">
-        <el-form-item label="Role name" prop="name" required>
-          <el-input type="text" prefix-icon="el-icon-edit" auto-complete="off" v-model="tempRole.name">
+        <el-form-item label="角色名称" prop="name" required>
+          <el-input type="text" auto-complete="off" v-model="tempRole.name" :readonly="dialogStatus != 'add'">
             <template v-if="dialogStatus === 'add'" slot="prepend">ROLE_</template>
           </el-input>
         </el-form-item>
-        <el-form-item label="Permission" required>
+        <el-form-item label="角色描述" prop="notes" required>
+          <el-input type="text" auto-complete="off" v-model="tempRole.notes" :readonly="dialogStatus != 'add'">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="选择权限" required>
           <div v-for="(permission, index) in allPermission" :key="index">
             <el-button size="mini" :type="isMenuNone(index) ? '' : (isMenuAll(index) ? 'success' : 'primary')" @click="checkAll(index)">{{ permission.resource }}
             </el-button>
@@ -65,10 +70,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">cancel</el-button>
-        <el-button type="success" v-if="dialogStatus === 'add'" :loading="btnLoading" @click.native.prevent="addRole">add
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="success" v-if="dialogStatus === 'add'" :loading="btnLoading" @click.native.prevent="addRole">创建
         </el-button>
-        <el-button type="primary" v-else :loading="btnLoading" @click.native.prevent="updateRole">update
+        <el-button type="primary" v-else :loading="btnLoading" @click.native.prevent="updateRole">修改
         </el-button>
       </div>
     </el-dialog>
@@ -101,7 +106,7 @@ export default {
         roleName = 'ROLE_' + roleName
       }
       if (!isValidateRoleName(roleName)) {
-        callback(new Error('role name format error. eg. ROLE_ABC'))
+        callback(new Error('角色名称格式错误。 例：ROLE_ABC'))
       } else {
         callback()
       }
@@ -118,13 +123,14 @@ export default {
       dialogStatus: 'add',
       dialogFormVisible: false,
       textMap: {
-        update: 'Update Role Permission',
-        add: 'Add Role'
+        update: '修改角色',
+        add: '新增角色'
       },
       btnLoading: false,
       tempRole: {
         id: '',
         name: '',
+        notes: '',
         permissionIdList: []
       },
       createRules: {
@@ -152,6 +158,7 @@ export default {
     getRoleList() {
       this.listLoading = true
       getRoleList(this.listQuery).then(response => {
+        console.log(response.data);
         this.roleList = response.data.list
         this.total = response.data.total
         this.listLoading = false
@@ -201,6 +208,7 @@ export default {
       this.dialogStatus = 'update'
       const role = this.roleList[index]
       this.tempRole.name = role.name
+      this.tempRole.notes = role.notes
       this.tempRole.id = role.id
       this.tempRole.permissionIdList = []
       for (let i = 0; i < role.resourceList.length; i++) {

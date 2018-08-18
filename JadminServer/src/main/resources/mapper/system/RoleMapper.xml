@@ -5,6 +5,7 @@
     <resultMap id="RoleMap" type="com.jadmin.api.model.Role">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="notes" jdbcType="VARCHAR" property="notes"/>
     </resultMap>
 
     <resultMap id="RoleWithPermissionMap" type="com.jadmin.api.model.Role" extends="RoleMap">
