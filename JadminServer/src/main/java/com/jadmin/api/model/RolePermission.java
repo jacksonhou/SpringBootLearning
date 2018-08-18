@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Table(name = "role_permission")

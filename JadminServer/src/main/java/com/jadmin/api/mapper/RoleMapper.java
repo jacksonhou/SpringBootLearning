@@ -7,7 +7,7 @@ import com.jadmin.api.model.Role;
 import java.util.List;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public interface RoleMapper extends MyMapper<Role> {

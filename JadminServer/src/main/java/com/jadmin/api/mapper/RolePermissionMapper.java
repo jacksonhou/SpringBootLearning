@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public interface RolePermissionMapper extends MyMapper<RolePermission> {

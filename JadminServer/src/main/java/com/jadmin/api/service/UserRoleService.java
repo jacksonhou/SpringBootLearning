@@ -5,7 +5,7 @@ import com.jadmin.api.model.User;
 import com.jadmin.api.model.UserRole;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public interface UserRoleService extends Service<UserRole> {

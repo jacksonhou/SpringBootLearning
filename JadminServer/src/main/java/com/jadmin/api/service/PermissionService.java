@@ -7,7 +7,7 @@ import com.jadmin.api.model.Permission;
 import java.util.List;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/05/17
  */
 public interface PermissionService extends Service<Permission> {
