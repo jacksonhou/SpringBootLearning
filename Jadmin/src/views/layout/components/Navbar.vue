@@ -1,18 +1,15 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-
-    <breadcrumb class="breadcrumb-container"></breadcrumb>
-
+    <!-- <breadcrumb class="breadcrumb-container"></breadcrumb> -->
     <div class="right-menu">
       <el-tooltip effect="dark" content="全屏" placement="bottom">
         <screenfull class="screenfull right-menu-item"></screenfull>
       </el-tooltip>
-
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
-          <i class="el-icon-caret-bottom"></i>
+          <img class="user-avatar" src="../../../assets/images/user2-160x160.jpg">
+          <!-- <i class="el-icon-caret-bottom"></i> -->
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
@@ -28,7 +25,6 @@
     </div>
   </el-menu>
 </template>
-
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -55,25 +51,26 @@ export default {
     },
     logout() {
       this.$store.dispatch('Logout').then(() => {
-        location.reload()// In order to re-instantiate the vue-router object to avoid bugs
+        location.reload() // In order to re-instantiate the vue-router object to avoid bugs
       })
     }
   }
 }
-</script>
 
+</script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
   height: 50px;
   line-height: 50px;
   border-radius: 0px !important;
+  background-color: rgb(48, 65, 86);
   .hamburger-container {
     line-height: 58px;
     height: 50px;
     float: left;
     padding: 0 10px;
   }
-  .breadcrumb-container{
+  .breadcrumb-container {
     float: left;
   }
   .errLog-container {
@@ -83,8 +80,8 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    &:focus{
-     outline: none;
+    &:focus {
+      outline: none;
     }
     .right-menu-item {
       display: inline-block;
@@ -93,7 +90,7 @@ export default {
     .screenfull {
       height: 20px;
     }
-    .international{
+    .international {
       vertical-align: top;
     }
     .theme-switch {
@@ -109,7 +106,7 @@ export default {
         .user-avatar {
           width: 40px;
           height: 40px;
-          border-radius: 10px;
+          border-radius: 20px;
         }
         .el-icon-caret-bottom {
           position: absolute;
@@ -121,4 +118,5 @@ export default {
     }
   }
 }
+
 </style>
