@@ -35,7 +35,7 @@ Vue.use(Element, {
 Vue.prototype.hasPermission = hasPermission
 
 // https://www.npmjs.com/package/vue-layer
-Vue.prototype.$layer = layer(Vue);
+// Vue.prototype.$layer = layer(Vue);
 // Vue.prototype.$layer = layer(Vue, {
 //     msgtime: 3,//目前只有一项，即msg方法的默认消失时间，单位：秒
 // });

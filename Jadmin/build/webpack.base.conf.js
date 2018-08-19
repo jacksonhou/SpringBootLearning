@@ -35,8 +35,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src'),
-      'vue': 'vue/dist/vue.js'
+      '@': resolve('src')
+      // 如果使用vue-layer，需要把下面这段代码代开
+      // 'vue': 'vue/dist/vue.js'
     }
   },
   module: {
