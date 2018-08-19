@@ -37,9 +37,9 @@
       </el-table-column>
       <el-table-column label="操作" align="center" v-if="hasPermission('role:update') || hasPermission('role:delete')">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit-outline" v-if="hasPermission('role:update') && scope.row.name !== 'ROLE_ADMIN'" @click="showUpdateRoleDialog(scope.$index)">修改
+          <el-button type="primary" size="mini" icon="el-icon-edit-outline" v-if="hasPermission('role:update') && scope.row.name !== 'ROLE_ADMIN'" @click="showUpdateRoleDialog(scope.$index)">修改
           </el-button>
-          <el-button type="danger" icon="el-icon-delete" v-if="hasPermission('role:delete') && scope.row.name !== 'ROLE_ADMIN'" @click="removeRole(scope.$index)">删除
+          <el-button type="danger" size="mini" icon="el-icon-delete" v-if="hasPermission('role:delete') && scope.row.name !== 'ROLE_ADMIN'" @click="removeRole(scope.$index)">删除
           </el-button>
         </template>
       </el-table-column>

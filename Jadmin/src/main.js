@@ -23,6 +23,7 @@ import {
 
 import * as filters from './filters' // global filters
 import $ from 'jquery'
+import layer from 'vue-layer'
 
 Vue.use(Element, {
   size: 'small', // set element-ui default size (medium / small / mini)
@@ -32,6 +33,12 @@ Vue.use(Element, {
 
 // 全局的常量
 Vue.prototype.hasPermission = hasPermission
+
+// https://www.npmjs.com/package/vue-layer
+Vue.prototype.$layer = layer(Vue);
+// Vue.prototype.$layer = layer(Vue, {
+//     msgtime: 3,//目前只有一项，即msg方法的默认消失时间，单位：秒
+// });
 
 // register global utility filters.
 Object.keys(filters).forEach(key => {
