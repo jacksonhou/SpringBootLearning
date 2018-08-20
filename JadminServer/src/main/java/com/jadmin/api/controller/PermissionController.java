@@ -21,17 +21,18 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/permission")
-public class PermissionController {
+public class PermissionController
+{
     @Resource
     private PermissionService permissionService;
 
-    @PreAuthorize("hasAuthority('role:list')")
+    @PreAuthorize("hasAuthority('system:role')")
     @GetMapping
-    public Result listResourcePermission(@RequestParam(defaultValue = "0") final Integer page,
-                                         @RequestParam(defaultValue = "0") final Integer size) {
+    public Result listResourcePermission(@RequestParam(defaultValue = "0") final Integer page, @RequestParam(defaultValue = "0") final Integer size)
+    {
         PageHelper.startPage(page, size);
         final List<JSONObject> list = this.permissionService.findAllResourcePermission();
-        //noinspection unchecked
+        // noinspection unchecked
         final PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genOkResult(pageInfo);
     }
