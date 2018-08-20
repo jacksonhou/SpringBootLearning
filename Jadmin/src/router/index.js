@@ -90,7 +90,7 @@ export const asyncRouterMap = [{
         import ('@/views/system/RoleList'),
       meta: {
         title: '角色管理',
-        permission: ['role:list']
+        permission: ['system:role']
       }
     }, {
       path: 'user',
@@ -99,7 +99,7 @@ export const asyncRouterMap = [{
         import ('@/views/system/UserList'),
       meta: {
         title: '用户管理',
-        permission: ['role:list']
+        permission: ['system:user']
       }
     }]
   },

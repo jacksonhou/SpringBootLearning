@@ -4,13 +4,13 @@ import {
 } from '@/router'
 
 /**
- * 通过meta.role判断是否与当前用户权限匹配
- * @param roles
+ * 通过meta.auth判断是否与当前用户权限匹配
+ * @param permissionCodeList
  * @param route
  */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.indexOf(role) >= 0)
+function hasPermission(permissionCodeList, route) {
+  if (route.meta && route.meta.permission) {
+    return permissionCodeList.some(permission => route.meta.permission.indexOf(permission) >= 0)
   } else {
     return true
   }

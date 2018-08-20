@@ -91,7 +91,7 @@ public class UserController
         return ResultGenerator.genOkResult(userDB);
     }
 
-    @PreAuthorize("hasAuthority('user:list')")
+    @PreAuthorize("hasAuthority('system:user')")
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") final Integer page, @RequestParam(defaultValue = "0") final Integer size,
             @RequestParam(defaultValue = "") final String userName)

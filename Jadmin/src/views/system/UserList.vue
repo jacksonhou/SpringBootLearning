@@ -6,7 +6,7 @@
           <el-input placeholder="用户名" v-model="listQuery.userName"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('user:list')" @click.native.prevent="getUserList">查询
+          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('system:user')" @click.native.prevent="getUserList">查询
           </el-button>
           <el-button type="primary" icon="el-icon-plus" v-if="hasPermission('user:add')" @click.native.prevent="showAddUserDialog">增加
           </el-button>
@@ -88,7 +88,7 @@ export default {
     if (this.hasPermission('role:update')) {
       this.getAllRole()
     }
-    if (this.hasPermission('user:list')) {
+    if (this.hasPermission('system:user')) {
       this.getUserList()
     }
   },
