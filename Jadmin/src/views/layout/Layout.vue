@@ -3,7 +3,7 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
     <sidebar class="sidebar-container"></sidebar>
     <div class="main-container">
-      <div class="header">
+      <div :class="{'header-shrink':!sidebar.opened,header:sidebar.opened}">
         <navbar></navbar>
         <tags-view></tags-view>
       </div>
@@ -11,10 +11,10 @@
     </div>
   </div>
 </template>
-
 <script>
 import { Navbar, Sidebar, AppMain, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'layout',
@@ -26,6 +26,9 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
+    ...mapGetters([
+      'sidebar'
+    ]),
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -47,8 +50,8 @@ export default {
     }
   }
 }
-</script>
 
+</script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import "src/styles/mixin.scss";
 .app-wrapper {
@@ -61,6 +64,7 @@ export default {
     top: 0;
   }
 }
+
 .drawer-bg {
   background: #000;
   opacity: 0.3;
@@ -70,6 +74,7 @@ export default {
   position: absolute;
   z-index: 999;
 }
+
 .header {
   position: fixed;
   display: inline-block;
@@ -78,7 +83,16 @@ export default {
   left: 180px;
 }
 
+.header-shrink {
+  position: fixed;
+  display: inline-block;
+  z-index: 1;
+  right: 0;
+  left: 36px;
+}
+
 .main-content {
   padding-top: 84px;
 }
+
 </style>
