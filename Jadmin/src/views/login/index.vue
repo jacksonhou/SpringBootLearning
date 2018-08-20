@@ -106,7 +106,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', user).then(() => {
             this.loading = false
-            this.$router.push({ path: '/system' })
+            this.$router.push({ path: '/dashboard' })
           })
         }
       })
