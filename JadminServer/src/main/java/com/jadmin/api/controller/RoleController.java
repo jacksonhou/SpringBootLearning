@@ -47,7 +47,7 @@ public class RoleController
         return ResultGenerator.genOkResult();
     }
 
-    @PreAuthorize("hasAuthority('role:list')")
+    @PreAuthorize("hasAuthority('system:role')")
     @GetMapping
     public Result list(@RequestParam(defaultValue = "0") final Integer page, @RequestParam(defaultValue = "0") final Integer size,
             @RequestParam(defaultValue = "") final String notes)

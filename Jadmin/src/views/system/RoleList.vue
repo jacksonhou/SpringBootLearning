@@ -6,7 +6,7 @@
           <el-input placeholder="角色描述" v-model="listQuery.notes"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('role:list')" @click.native.prevent="getRoleList">查询
+          <el-button type="success" icon="el-icon-refresh" v-if="hasPermission('system:role')" @click.native.prevent="getRoleList">查询
           </el-button>
           <el-button type="primary" icon="el-icon-plus" v-if="hasPermission('role:add')" @click.native.prevent="showAddRoleDialog">增加
           </el-button>
@@ -89,7 +89,7 @@ export default {
     if (this.hasPermission('role:update')) {
       this.getAllPermission()
     }
-    if (this.hasPermission('role:list')) {
+    if (this.hasPermission('system:role')) {
       this.getRoleList()
     }
   },
