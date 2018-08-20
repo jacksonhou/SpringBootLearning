@@ -19,7 +19,7 @@ import static com.jadmin.api.core.ProjectConstant.*;
 @SuppressWarnings("SameParameterValue")
 class CodeGenerator {
     // JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/api_dev" + "?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/admin_dev" + "?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
@@ -51,7 +51,7 @@ class CodeGenerator {
         if (scanner.next().equals("y")) {
             overwrite = true;
         }
-        genCode("表名");
+        genCode("student_t");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 
