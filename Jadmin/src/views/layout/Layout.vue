@@ -3,7 +3,7 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
     <sidebar class="sidebar-container"></sidebar>
     <div class="main-container">
-      <div :class="{'header-shrink':!sidebar.opened,header:sidebar.opened}">
+      <div :class="{'header-shrink':!sidebar.opened,'header':sidebar.opened}">
         <navbar></navbar>
         <tags-view></tags-view>
       </div>

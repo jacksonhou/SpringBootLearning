@@ -1,7 +1,7 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
-    <!-- <breadcrumb class="breadcrumb-container"></breadcrumb> -->
+    <span class="breadcrumb-container">Jadmin后台管理系统</span>
     <div class="right-menu">
       <el-tooltip effect="dark" content="全屏" placement="bottom">
         <screenfull class="screenfull right-menu-item"></screenfull>
@@ -72,6 +72,8 @@ export default {
   }
   .breadcrumb-container {
     float: left;
+    color: white;
+    font-family: "微软雅黑";
   }
   .errLog-container {
     display: inline-block;
