@@ -34,11 +34,11 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (1,'user','user:list','list');
+INSERT INTO `permission` VALUES (1,'user','system:user','list');
 INSERT INTO `permission` VALUES (2,'user','user:add','add');
 INSERT INTO `permission` VALUES (3,'user','user:update','update');
 INSERT INTO `permission` VALUES (4,'user','user:delete','delete');
-INSERT INTO `permission` VALUES (5,'role','role:list','list');
+INSERT INTO `permission` VALUES (5,'role','system:role','list');
 INSERT INTO `permission` VALUES (6,'role','role:add','add');
 INSERT INTO `permission` VALUES (7,'role','role:update','update');
 INSERT INTO `permission` VALUES (8,'role','role:delete','delete');
