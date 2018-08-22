@@ -8,6 +8,8 @@ import com.jadmin.api.core.response.ResultGenerator;
 import com.jadmin.api.model.User;
 import com.jadmin.api.service.UserService;
 import com.jadmin.api.service.impl.UserDetailsServiceImpl;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
@@ -91,10 +93,12 @@ public class UserController
         return ResultGenerator.genOkResult(userDB);
     }
 
+    @ApiOperation(value = "用户列表获取接口", notes = "可指定页码及每页条数", produces = "application/json")
     @PreAuthorize("hasAuthority('system:user')")
     @GetMapping
-    public Result list(@RequestParam(defaultValue = "0") final Integer page, @RequestParam(defaultValue = "0") final Integer size,
-            @RequestParam(defaultValue = "") final String userName)
+    public Result list(@ApiParam(value = "第几页") @RequestParam(defaultValue = "0") final Integer page,
+            @ApiParam(value = "每页条数") @RequestParam(defaultValue = "0") final Integer size,
+            @ApiParam(value = "用户名") @RequestParam(defaultValue = "") final String userName)
     {
         PageHelper.startPage(page, size);
         final List<User> list = this.userService.findAllUserWithRole(userName);
@@ -103,8 +107,9 @@ public class UserController
         return ResultGenerator.genOkResult(pageInfo);
     }
 
+    @ApiOperation(value = "用户登录接口", notes = "登录", produces = "application/json")
     @PostMapping("/login")
-    public Result login(@RequestBody final User user)
+    public Result login(@ApiParam(value = "用户信息") @RequestBody final User user)
     {
         // {"username":"admin", "password":"admin123"}
         // {"email":"admin@qq.com", "password":"admin123"}

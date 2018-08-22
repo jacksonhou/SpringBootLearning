@@ -1,6 +1,8 @@
 package com.jadmin.api.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,6 +15,7 @@ import java.util.List;
  * @author Zoctan
  * @date 2018/06/09
  */
+@ApiModel
 public class User {
     /**
      * 用户Id

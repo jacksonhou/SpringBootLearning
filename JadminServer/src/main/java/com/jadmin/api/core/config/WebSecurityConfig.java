@@ -27,26 +27,30 @@ import javax.annotation.Resource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
     @Resource
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Resource
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     @Override
-    public UserDetailsServiceImpl userDetailsService() {
+    public UserDetailsServiceImpl userDetailsService()
+    {
         return new UserDetailsServiceImpl();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth)
-            throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception
+    {
         auth
                 // 自定义获取用户信息
                 .userDetailsService(this.userDetailsService())
@@ -55,8 +59,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(final HttpSecurity http)
-            throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception
+    {
         http    // 关闭cors
                 .cors().disable()
                 // 关闭csrf
@@ -67,12 +71,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint).and()
                 // 对所有的请求都做权限校验
                 .authorizeRequests()
-                // 允许登录和注册
-                .antMatchers(
-                        HttpMethod.POST,
-                        "/user/login",
-                        "/user"
-                ).permitAll()
+                // 允许登录和注册(哪些接口不需要认证就能访问，就在此处添加)
+                .antMatchers(HttpMethod.POST, "/user/login", "/user").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/configuration/security").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated().and();
 
