@@ -2,64 +2,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Swagger Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="webjars/springfox-swagger-ui/css/htmleaf-demo.css">
-    <link rel="stylesheet" type="text/css" href="webjars/springfox-swagger-ui/css/login.css">
+<meta charset="UTF-8">
+<title>Swagger Login</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="webjars/springfox-swagger-ui/css/htmleaf-demo.css">
+<link rel="stylesheet" type="text/css"
+	href="webjars/springfox-swagger-ui/css/login.css">
 </head>
 
 <body>
-<div class="htmleaf-container">
-    <header class="htmleaf-header">
-        <h1>Swagger文档登录</h1>
-        <div class="htmleaf-links">
-        </div>
-    </header>
-    <div class="demo form-bg" style="padding: 20px 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal">
-                        <span class="heading">用户登录</span>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="用户名">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="form-group help">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
-                            <i class="fa fa-lock"></i>
-                            <a href="#" class="fa fa-question-circle"></a>
-                        </div>
-                        <div class="form-group">
-                            <div class="main-checkbox">
-                                <input type="checkbox" value="None" id="checkbox1" name="check"/>
-                                <label for="checkbox1"></label>
-                            </div>
-                            <span class="text">Remember me</span>
-                            <button type="submit" class="btn btn-default" onclick="login();return false;">登录</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>Swagger接口文档</h1>
+			<div class="htmleaf-links"></div>
+		</header>
+		<div class="demo form-bg" style="padding: 20px 0;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+						<form class="form-horizontal">
+							<span class="heading">用户登录</span>
+							<div class="form-group">
+								<input type="email" class="form-control" id="username"
+									placeholder="用户名"> <i class="fa fa-user"></i>
+							</div>
+							<div class="form-group help">
+								<input type="password" class="form-control" id="password"
+									placeholder="密码"> <i class="fa fa-lock"></i> <a
+									href="#" class="fa fa-question-circle"></a>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-default"
+									onclick="login();return false;">登录</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </body>
 </html>
 <script>
-    $(function () {
-        setTimeout(function () {
-            // $('.swagger-ui').hide();
-            // $('.htmleaf-container').show();
-        }, 1000);
-    });
+	var __ctxPath = "";
+	$(function() {
+		var url = window.location.href;
+		var urlAyyary = url.split('/');
+		__ctxPath = urlAyyary.slice(0, urlAyyary.length - 1).join('/');
+	});
 
-    function login() {
-        window.location.href = "/swagger-ui.html";
-    }
+	function login() {
+		if ($('#username').val() == '' || $('#password').val() == '') {
+			alert("用户名或者密码不能为空！");
+			return;
+		}
+		$.ajax({
+			type : "POST",
+			url : __ctxPath + "/user/login",
+			contentType : "application/json", //如果提交的是json数据类型，则必须有此参数,表示提交的数据类型 
+			data : JSON.stringify({
+				"username" : $('#username').val(),
+				"password" : $('#password').val()
+			}),
+			success : function(result) {
+				if (result.code === 200) {
+					$.cookie('User-Token', result.data, {
+						expires : 1
+					});
+					window.location.href = "/swagger-ui.html";
+				} else {
+					alert(result.msg);
+				}
+			},
+			error : function(data) {
+				alert("登录失败");
+			}
+		});
+	}
 </script>
