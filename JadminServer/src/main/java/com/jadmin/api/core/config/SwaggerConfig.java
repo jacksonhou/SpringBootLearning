@@ -85,7 +85,7 @@ public class SwaggerConfig
 
     private ApiInfo productApiInfo()
     {
-        return new ApiInfoBuilder().title("使用Swagger2构建RESTful APIs").description("物华天宝 , 龙光射牛斗之墟 \r" + "人杰地灵 , 徐孺下陈蕃之榻")
-                .termsOfServiceUrl("www.baidu.com").contact(new Contact("Q_先生", "www.baidu.com", "邮箱")).version("1.0").build();
+        return new ApiInfoBuilder().title("Swagger接口文档").description("Swagger接口说明")
+                .termsOfServiceUrl("www.baidu.com").contact(new Contact("Jadmin", "www.baidu.com", "邮箱")).version("1.0").build();
     }
 }

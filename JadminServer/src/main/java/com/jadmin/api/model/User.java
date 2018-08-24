@@ -3,6 +3,7 @@ package com.jadmin.api.model;
 import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -36,6 +37,7 @@ public class User {
      */
     @NotEmpty(message = "用户名不能为空")
     @Size(min = 3, message = "用户名长度不能小于3")
+    @ApiModelProperty(value="用户名",name="username",example="admin")
     private String username;
 
     /**
@@ -44,6 +46,7 @@ public class User {
     @JSONField(serialize = false)
     @NotEmpty(message = "密码不能为空")
     @Size(min = 6, message = "密码长度不能小于6")
+    @ApiModelProperty(value="密码",name="password",example="admin123")
     private String password;
 
     /**

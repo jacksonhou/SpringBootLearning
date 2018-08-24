@@ -74,12 +74,14 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 // 允许登录和注册(哪些接口不需要认证就能访问，就在此处添加)
                 .antMatchers(HttpMethod.POST, "/user/login", "/user").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-login.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
                 .antMatchers("/configuration/ui").permitAll()
                 .antMatchers("/configuration/security").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated().and();
 

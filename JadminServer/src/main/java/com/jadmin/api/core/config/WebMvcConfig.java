@@ -50,8 +50,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        // 原版swagger-ui用下面的代码（并放开pom文件中的注释）
+        // registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        // registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        // 自定义的swagger-ui用下面的代码
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/");
+        registry.addResourceHandler("swagger-login.html").addResourceLocations("classpath:/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/webjars/");
         super.addResourceHandlers(registry);
     }
 
