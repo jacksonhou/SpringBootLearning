@@ -13,7 +13,7 @@ import javax.validation.ValidatorFactory;
  * 参数校验
  * https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-constraint-violation-methods
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Configuration

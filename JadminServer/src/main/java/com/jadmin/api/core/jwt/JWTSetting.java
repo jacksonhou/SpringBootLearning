@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Json web token配置
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Component

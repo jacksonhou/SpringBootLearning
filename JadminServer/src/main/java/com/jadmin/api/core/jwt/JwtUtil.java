@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * Json web token 工具
  * 验证、生成token
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Component

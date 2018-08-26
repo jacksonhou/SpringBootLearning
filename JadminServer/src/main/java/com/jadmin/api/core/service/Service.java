@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Service层基础接口，其他Service接口 请继承该接口
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/05/07
  */
 public interface Service<T> {

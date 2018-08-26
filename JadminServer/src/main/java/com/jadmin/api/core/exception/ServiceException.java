@@ -3,7 +3,7 @@ package com.jadmin.api.core.exception;
 /**
  * Service异常
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public class ServiceException extends RuntimeException {

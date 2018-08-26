@@ -32,7 +32,7 @@ import java.security.spec.X509EncodedKeySpec;
  * openssl pkcs8 -topk8 -inform PEM -in key.pem -outform PEM -out private-key.pem -nocrypt
  * 最后将公私玥放在/resources/rsa/：private-key.pem public-key.pem
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/05/27
  */
 @Component

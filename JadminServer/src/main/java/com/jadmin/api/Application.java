@@ -12,7 +12,7 @@ import java.util.TimeZone;
 import static com.jadmin.api.core.ProjectConstant.MAPPER_PACKAGE;
 
 /**
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @EnableEncryptableProperties

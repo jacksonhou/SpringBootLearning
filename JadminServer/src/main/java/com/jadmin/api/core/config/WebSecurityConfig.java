@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 /**
  * 安全设置
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Configuration

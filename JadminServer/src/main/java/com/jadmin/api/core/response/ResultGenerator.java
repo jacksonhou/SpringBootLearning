@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 响应结果生成工具
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public class ResultGenerator {

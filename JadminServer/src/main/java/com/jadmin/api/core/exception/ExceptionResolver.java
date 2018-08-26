@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * 统一异常处理
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @RestControllerAdvice

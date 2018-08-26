@@ -3,7 +3,7 @@ package com.jadmin.api.core;
 /**
  * 项目常量
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 public final class ProjectConstant {

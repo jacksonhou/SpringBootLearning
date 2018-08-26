@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Json web token 入口点
  *
- * @author Zoctan
+ * @author Jadmin
  * @date 2018/06/09
  */
 @Component
