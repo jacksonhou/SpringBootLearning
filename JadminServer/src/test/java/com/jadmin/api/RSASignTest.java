@@ -1,6 +1,6 @@
 package com.jadmin.api;
 
-import com.jadmin.api.util.RSAUtil;
+import com.jadmin.admin.system.util.RSAUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

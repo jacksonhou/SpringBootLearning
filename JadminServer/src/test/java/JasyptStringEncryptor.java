@@ -1,4 +1,4 @@
-import com.jadmin.api.Application;
+import com.jadmin.admin.Application;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;

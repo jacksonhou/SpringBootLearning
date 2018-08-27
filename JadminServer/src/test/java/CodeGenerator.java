@@ -11,44 +11,92 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.jadmin.api.core.ProjectConstant.*;
-
 /**
  * 代码生成器，根据数据表名称生成对应的Model、MyMapper、Service、Controller简化开发。
  */
 @SuppressWarnings("SameParameterValue")
-class CodeGenerator {
+class CodeGenerator
+{
+    /**
+     * 项目基础包名称
+     */
+    private static final String BASE_PACKAGE = "com.jadmin.admin.system";
+
+    /**
+     * Model所在包
+     */
+    public static final String MODEL_PACKAGE = BASE_PACKAGE + ".model";
+
+    /**
+     * Mapper所在包
+     */
+    public static final String MAPPER_PACKAGE = BASE_PACKAGE + ".mapper";
+
+    /**
+     * Service所在包
+     */
+    public static final String SERVICE_PACKAGE = BASE_PACKAGE + ".service";
+
+    /**
+     * ServiceImpl所在包
+     */
+    public static final String SERVICE_IMPL_PACKAGE = SERVICE_PACKAGE + ".impl";
+    /**
+     * Controller所在包
+     */
+    public static final String CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";
+
+    /**
+     * Mapper插件基础接口的完全限定名
+     */
+    public static final String MAPPER_INTERFACE_REFERENCE = BASE_PACKAGE + ".core.mapper.MyMapper";
+
     // JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/admin_dev" + "?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/admin_dev?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
     private static final String JDBC_USERNAME = "root";
+
     private static final String JDBC_PASSWORD = "root";
+
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+
     // 项目在硬盘上的基础路径
     private static final String PROJECT_PATH = System.getProperty("user.dir");
+
     // 模板位置
     private static final String TEMPLATE_FILE_PATH = PROJECT_PATH + "/src/test/resources/generator/template";
+
     // java文件路径
     private static final String JAVA_PATH = "/src/main/java";
+
     // 资源文件路径
     private static final String RESOURCES_PATH = "/src/main/resources";
+
     // 生成的Service存放路径
     private static final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);
+
     // 生成的Service实现存放路径
     private static final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);
+
     // 生成的Controller存放路径
     private static final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);
 
     // @author
     private static final String AUTHOR = "Jadmin";
+
     // @date
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+
     private static final boolean isRestful = true;
+
     private static boolean overwrite = false;
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         final Scanner scanner = new Scanner(System.in);
         System.out.print("可能已存在相关文件，是否覆盖？y/n:");
-        if (scanner.next().equals("y")) {
+        if (scanner.next().equals("y"))
+        {
             overwrite = true;
         }
         genCode("student_t");
@@ -61,8 +109,10 @@ class CodeGenerator {
      *
      * @param tableNames 数据表名称...
      */
-    private static void genCode(final String... tableNames) {
-        for (final String tableName : tableNames) {
+    private static void genCode(final String... tableNames)
+    {
+        for (final String tableName : tableNames)
+        {
             genCodeByCustomModelName(tableName, null);
         }
     }
@@ -74,14 +124,15 @@ class CodeGenerator {
      * @param tableName 数据表名称
      * @param modelName 自定义的 Model 名称
      */
-    private static void genCodeByCustomModelName(final String tableName, final String modelName) {
+    private static void genCodeByCustomModelName(final String tableName, final String modelName)
+    {
         genModelAndMapper(tableName, modelName);
         genService(tableName, modelName);
         genController(tableName, modelName);
     }
 
-
-    private static void genModelAndMapper(final String tableName, String modelName) {
+    private static void genModelAndMapper(final String tableName, String modelName)
+    {
         final Context context = new Context(ModelType.FLAT);
         context.setId("Potato");
         context.setTargetRuntime("MyBatis3Simple");
@@ -118,7 +169,8 @@ class CodeGenerator {
 
         final TableConfiguration tableConfiguration = new TableConfiguration(context);
         tableConfiguration.setTableName(tableName);
-        if (StringUtils.isNotEmpty(modelName)) {
+        if (StringUtils.isNotEmpty(modelName))
+        {
             tableConfiguration.setDomainObjectName(modelName);
         }
         tableConfiguration.setGeneratedKey(new GeneratedKey("id", "Mysql", true, null));
@@ -126,7 +178,8 @@ class CodeGenerator {
 
         final List<String> warnings;
         final MyBatisGenerator generator;
-        try {
+        try
+        {
             final Configuration config = new Configuration();
             config.addContext(context);
             config.validate();
@@ -135,14 +188,18 @@ class CodeGenerator {
             warnings = new ArrayList<>();
             generator = new MyBatisGenerator(config, callback, warnings);
             generator.generate(null);
-        } catch (final Exception e) {
+        }
+        catch (final Exception e)
+        {
             throw new RuntimeException("生成 Model和 Mapper 失败", e);
         }
 
-        if (generator.getGeneratedJavaFiles().isEmpty() || generator.getGeneratedXmlFiles().isEmpty()) {
+        if (generator.getGeneratedJavaFiles().isEmpty() || generator.getGeneratedXmlFiles().isEmpty())
+        {
             throw new RuntimeException("生成 Model 和 Mapper 失败：" + warnings);
         }
-        if (StringUtils.isEmpty(modelName)) {
+        if (StringUtils.isEmpty(modelName))
+        {
             modelName = tableNameConvertUpperCamel(tableName);
         }
         System.out.println(modelName + ".java 生成成功");
@@ -150,8 +207,10 @@ class CodeGenerator {
         System.out.println(modelName + "MyMapper.xml 生成成功");
     }
 
-    private static void genService(final String tableName, final String modelName) {
-        try {
+    private static void genService(final String tableName, final String modelName)
+    {
+        try
+        {
             final freemarker.template.Configuration cfg = getConfiguration();
 
             final Map<String, Object> data = new HashMap<>();
@@ -163,33 +222,39 @@ class CodeGenerator {
             data.put("basePackage", BASE_PACKAGE);
 
             final File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + modelNameUpperCamel + "Service.java");
-            if (!file.getParentFile().exists()) {
+            if (!file.getParentFile().exists())
+            {
                 final boolean isMake = file.getParentFile().mkdirs();
-                if (!isMake) {
+                if (!isMake)
+                {
                     throw new IOException("新建文件失败");
                 }
             }
-            cfg.getTemplate("service.ftl").process(data,
-                    new FileWriter(file));
+            cfg.getTemplate("service.ftl").process(data, new FileWriter(file));
             System.out.println(modelNameUpperCamel + "Service.java 生成成功");
 
             final File file1 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + modelNameUpperCamel + "ServiceImpl.java");
-            if (!file1.getParentFile().exists()) {
+            if (!file1.getParentFile().exists())
+            {
                 final boolean isMake = file1.getParentFile().mkdirs();
-                if (!isMake) {
+                if (!isMake)
+                {
                     throw new IOException("新建文件失败");
                 }
             }
-            cfg.getTemplate("service-impl.ftl").process(data,
-                    new FileWriter(file1));
+            cfg.getTemplate("service-impl.ftl").process(data, new FileWriter(file1));
             System.out.println(modelNameUpperCamel + "ServiceImpl.java 生成成功");
-        } catch (final Exception e) {
+        }
+        catch (final Exception e)
+        {
             throw new RuntimeException("生成 Service 失败，", e);
         }
     }
 
-    private static void genController(final String tableName, final String modelName) {
-        try {
+    private static void genController(final String tableName, final String modelName)
+    {
+        try
+        {
             final freemarker.template.Configuration cfg = getConfiguration();
 
             final Map<String, Object> data = new HashMap<>();
@@ -202,26 +267,34 @@ class CodeGenerator {
             data.put("basePackage", BASE_PACKAGE);
 
             final File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel + "Controller.java");
-            if (!file.getParentFile().exists()) {
+            if (!file.getParentFile().exists())
+            {
                 final boolean isMake = file.getParentFile().mkdirs();
-                if (!isMake) {
+                if (!isMake)
+                {
                     throw new IOException("新建文件失败");
                 }
             }
 
-            if (isRestful) {
+            if (isRestful)
+            {
                 cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
-            } else {
+            }
+            else
+            {
                 cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
             }
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
-        } catch (final Exception e) {
+        }
+        catch (final Exception e)
+        {
             throw new RuntimeException("生成 Controller 失败，", e);
         }
 
     }
 
-    private static freemarker.template.Configuration getConfiguration() throws IOException {
+    private static freemarker.template.Configuration getConfiguration() throws IOException
+    {
         final freemarker.template.Configuration cfg = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_23);
         cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_PATH));
         cfg.setDefaultEncoding("UTF-8");
@@ -229,26 +302,31 @@ class CodeGenerator {
         return cfg;
     }
 
-    private static String tableNameConvertLowerCamel(final String tableName) {
+    private static String tableNameConvertLowerCamel(final String tableName)
+    {
         return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, tableName.toLowerCase());
     }
 
-    private static String tableNameConvertUpperCamel(final String tableName) {
+    private static String tableNameConvertUpperCamel(final String tableName)
+    {
         return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());
 
     }
 
-    private static String tableNameConvertMappingPath(String tableName) {
+    private static String tableNameConvertMappingPath(String tableName)
+    {
         tableName = tableName.toLowerCase();//兼容使用大写的表名
         return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
     }
 
-    private static String modelNameConvertMappingPath(final String modelName) {
+    private static String modelNameConvertMappingPath(final String modelName)
+    {
         final String tableName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, modelName);
         return tableNameConvertMappingPath(tableName);
     }
 
-    private static String packageConvertPath(final String packageName) {
+    private static String packageConvertPath(final String packageName)
+    {
         return String.format("/%s/", packageName.contains(".") ? packageName.replaceAll("\\.", "/") : packageName);
     }
 

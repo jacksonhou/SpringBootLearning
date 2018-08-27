@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jadmin.api.mapper.RolePermissionMapper">
-    <resultMap id="BaseResultMap" type="com.jadmin.api.model.RolePermission">
+<mapper namespace="com.jadmin.admin.system.mapper.RolePermissionMapper">
+    <resultMap id="BaseResultMap" type="com.jadmin.admin.system.model.RolePermission">
         <id column="role_id" jdbcType="BIGINT" property="roleId"/>
         <id column="permission_id" jdbcType="BIGINT" property="permissionId"/>
     </resultMap>
